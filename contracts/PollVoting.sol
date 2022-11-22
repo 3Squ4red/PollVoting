@@ -172,10 +172,14 @@ contract PollVoting {
     {
         uint256 winnerIndex = 0;
         uint256 maxVotes = 0;
-        for (uint256 i = 0; i < options.length; i++) {
+        for (uint256 i = 0; i < options.length; ) {
             if (votes[i] > maxVotes) {
                 maxVotes = votes[i];
                 winnerIndex = i;
+            }
+
+            unchecked {
+                i++;
             }
         }
         return options[winnerIndex];
